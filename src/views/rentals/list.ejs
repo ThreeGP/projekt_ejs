@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wypożyczenia</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+    <main>
+      <h1>Aktywne i zakończone wypożyczenia</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Klient</th>
+            <th>Email</th>
+            <th>Film</th>
+            <th>Dni</th>
+            <th>Rozpoczęcie</th>
+            <th>Status</th>
+            <th>Akcja</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (rentals.length === 0) { %>
+          <tr>
+            <td colspan="7">Brak wypożyczeń</td>
+          </tr>
+          <% } %>
+          <% rentals.forEach(rental => { %>
+          <tr>
+            <td><%= rental.customerName %></td>
+            <td><%= rental.customerEmail %></td>
+            <td><%= rental.movie ? rental.movie.title : "USUNIĘTY" %></td>
+            <td><%= rental.days %></td>
+            <td><%= rental.rentedOn.toLocaleDateString() %></td>
+            <td><%= rental.returned ? "zwrócony" : "wypożyczony" %></td>
+            <td>
+              <% if (!rental.returned) { %>
+              <form method="post" action="/rentals/<%= rental._id %>/finish">
+                <button type="submit">Zwrócono</button>
+              </form>
+              <% } else { %>
+              ✅
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

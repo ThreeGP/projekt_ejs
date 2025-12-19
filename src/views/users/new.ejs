@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nowy użytkownik</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+    <main>
+      <h1>Dodaj użytkownika</h1>
+      <% if (errors.length) { %>
+      <ul>
+        <% errors.forEach(err => { %>
+        <li class="alert"><%= err.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+      <form method="post" action="/users">
+        <input name="username" placeholder="Login" value="<%= user.username || "" %>" />
+        <input name="password" type="password" placeholder="Hasło" />
+        <select name="role">
+          <option value="clerk" <%= user.role === "clerk" ? "selected" : "" %>>Pracownik</option>
+          <option value="owner" <%= user.role === "owner" ? "selected" : "" %>>Właściciel</option>
+        </select>
+        <button type="submit">Zapisz</button>
+      </form>
+    </main>
+  </body>
+</html>

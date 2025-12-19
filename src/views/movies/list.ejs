@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Filmy</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+    <main>
+      <h1>Lista filmów</h1>
+      <form method="get" class="filters">
+        <input type="text" name="search" placeholder="Szukaj tytułu" value="<%= filters.search %>" />
+        <select name="genre">
+          <option value="">Dowolny gatunek</option>
+          <% genres.forEach(g => { %>
+          <option value="<%= g %>" <%= filters.genre === g ? "selected" : "" %>><%= g %></option>
+          <% }) %>
+        </select>
+        <select name="sort">
+          <option value="title" <%= filters.sort === "title" ? "selected" : "" %>>Tytuł</option>
+          <option value="year" <%= filters.sort === "year" ? "selected" : "" %>>Rok</option>
+        </select>
+        <select name="order">
+          <option value="asc" <%= filters.order === "asc" ? "selected" : "" %>>Rosnąco</option>
+          <option value="desc" <%= filters.order === "desc" ? "selected" : "" %>>Malejąco</option>
+        </select>
+        <button type="submit">Filtruj</button>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Tytuł</th>
+            <th>Gatunek</th>
+            <th>Rok</th>
+            <th>Na stanie</th>
+            <th>Cena</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (movies.length === 0) { %>
+          <tr>
+            <td colspan="6">Brak filmów</td>
+          </tr>
+          <% } %>
+          <% movies.forEach(movie => { %>
+          <tr>
+            <td><a href="/movies/<%= movie._id %>"><%= movie.title %></a></td>
+            <td><%= movie.genre %></td>
+            <td><%= movie.year %></td>
+            <td><%= movie.stock %></td>
+            <td><%= movie.dailyPrice %> zł</td>
+            <td class="actions">
+              <a href="/movies/<%= movie._id %>/edit">Edytuj</a>
+              <form method="post" action="/movies/<%= movie._id %>/delete" style="display:inline;">
+                <button type="submit">Usuń</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

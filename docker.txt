@@ -1,0 +1,18 @@
+# Instrukcja uruchomienia bazy MongoDB
+
+1. Upewnij się, że Docker działa (`docker --version`).
+2. W katalogu projektu uruchom:
+   ```bash
+   docker compose up -d mongo
+   ```
+   - obraz: `mongo:7`
+   - port hosta: `27017`
+   - port kontenera: `27017`
+   - baza startowa: `film_rental`
+3. Sprawdź, czy kontener działa: `docker ps` (powinieneś zobaczyć usługę `projekt-mongo-1`).
+4. Aplikacja łączy się z URI `mongodb://localhost:27017` i nazwą bazy `film_rental` (zmienne `.env`: `MONGODB_URI` i `MONGODB_DB`).
+5. Kontener nie ma hasła ani użytkownika – baza jest lokalna. Jeśli chcesz dodać użytkownika:
+   ```bash
+   docker exec -it projekt-mongo-1 mongosh --eval "db.createUser({user: 'uczen', pwd: 'tajne', roles:[{role:'readWrite', db:'film_rental'}]})"
+   ```
+6. Aby zatrzymać bazę, użyj `docker compose down`.

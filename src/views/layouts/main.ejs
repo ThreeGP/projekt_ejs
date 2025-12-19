@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || "Wypożyczalnia" %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <%- include("../partials/nav") %>
+    </header>
+    <main>
+      <%- body %>
+    </main>
+    <footer>
+      <p>Wypożyczalnia filmów &copy; <%= new Date().getFullYear() %></p>
+    </footer>
+  </body>
+</html>

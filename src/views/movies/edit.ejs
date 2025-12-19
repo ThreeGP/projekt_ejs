@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edytuj film</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+    <main>
+      <h1>Edytuj film</h1>
+      <% if (errors.length) { %>
+      <ul>
+        <% errors.forEach(err => { %>
+        <li class="alert"><%= err.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+      <form method="post" action="/movies/<%= movie._id %>/update">
+        <input name="title" value="<%= movie.title %>" />
+        <input name="genre" value="<%= movie.genre %>" />
+        <input type="number" name="year" value="<%= movie.year %>" />
+        <input type="number" name="stock" value="<%= movie.stock %>" />
+        <input type="number" name="dailyPrice" step="0.5" value="<%= movie.dailyPrice %>" />
+        <textarea name="description"><%= movie.description %></textarea>
+        <button type="submit">Zapisz</button>
+      </form>
+    </main>
+  </body>
+</html>

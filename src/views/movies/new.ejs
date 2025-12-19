@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nowy film</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/nav") %>
+    <main>
+      <h1>Dodaj film</h1>
+      <% if (errors.length) { %>
+      <ul>
+        <% errors.forEach(err => { %>
+        <li class="alert"><%= err.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+      <form method="post" action="/movies">
+        <input name="title" placeholder="Tytuł" value="<%= movie.title || "" %>" />
+        <input name="genre" placeholder="Gatunek" value="<%= movie.genre || "" %>" />
+        <input type="number" name="year" placeholder="Rok" value="<%= movie.year || "" %>" />
+        <input type="number" name="stock" placeholder="Stan" value="<%= movie.stock || "" %>" />
+        <input type="number" name="dailyPrice" step="0.5" placeholder="Cena" value="<%= movie.dailyPrice || "" %>" />
+        <textarea name="description" placeholder="Opis"><%= movie.description || "" %></textarea>
+        <button type="submit">Zapisz</button>
+      </form>
+    </main>
+  </body>
+</html>
