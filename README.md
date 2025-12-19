@@ -63,7 +63,7 @@ Bardzo prosty projekt Node.js pomagający śledzić wypożyczanie filmów na lek
 
 ## Autorzy
 
-- Student (zadanie zaliczeniowe)
+- 3gp (zadanie zaliczeniowe)
 
 ## Licencja
 
